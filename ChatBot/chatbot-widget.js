@@ -120,26 +120,37 @@ function getCurrentTime() {
 function addMessage(text, isBot = false) {
   const messageDiv = document.createElement('div');
   messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
-  
+
+  const currentPage = window.location.pathname.split('/').pop();
+  const isRootPage = currentPage === '' || currentPage === 'index.html';
+
+  const botImgPath = isRootPage ? 'images/bot.png' : '../images/bot.png';
+  const userImgPath = isRootPage ? 'images/user.png' : '../images/user.png';
+
   const avatar = document.createElement('div');
   avatar.className = `avatar ${isBot ? 'bot-avatar' : 'user-avatar'}`;
+
   const avatarImg = document.createElement('img');
-  avatarImg.src = isBot ? '../images/bot.png' : '../images/user.png';
+  avatarImg.src = isBot ? botImgPath : userImgPath;
   avatarImg.width = 24;
+  avatar.loading = "lazy";
+
   avatar.appendChild(avatarImg);
-  
+
   const contentWrapper = document.createElement('div');
   contentWrapper.className = 'message-content-wrapper';
-  
+
   const bubble = document.createElement('div');
   bubble.className = `message-bubble ${isBot ? 'bot-bubble' : 'user-bubble'}`;
-  
+
   const p = document.createElement('p');
 
   if (isBot) {
     if (Array.isArray(text)) {
+      // List format
       p.innerHTML = text.map((t, i) => `${i + 1}. ${t}`).join('<br>');
     } else if (typeof text === 'string') {
+      // Multi-line formatting
       const formatted = text
         .split('\n')
         .map(line => {
@@ -171,7 +182,7 @@ function addMessage(text, isBot = false) {
   contentWrapper.appendChild(time);
   messageDiv.appendChild(avatar);
   messageDiv.appendChild(contentWrapper);
-  
+
   messagesContainer.appendChild(messageDiv);
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
