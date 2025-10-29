@@ -91,7 +91,7 @@ function renderProducts() {
       const productData = products.find(p => p.id == id);
       if (productData) {
         localStorage.setItem("item", JSON.stringify(productData));
-        window.location.href = `product-detail.html?id=${id}`;
+        window.location.href = `pages/product-detail.html?id=${id}`;
       }
     });
   });
@@ -159,7 +159,7 @@ document.querySelectorAll('.nav-link[data-brand]').forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const brand = e.target.dataset.brand;
-    window.location.href = `products.html?brand=${encodeURIComponent(brand)}`;
+    window.location.href = `pages/products.html?brand=${encodeURIComponent(brand)}`;
   });
 });
 
