@@ -2,7 +2,7 @@ let products = []
 
 //Fetch and display products
 async function getProduct() {
-  const response = await fetch("data/products.json");
+  const response = await fetch("../data/products.json");
   products = await response.json();
 
   //Shuffle products randomly

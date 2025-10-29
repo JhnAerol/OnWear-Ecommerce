@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OnWear - Products</title>
-  <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   
 </head>
@@ -14,8 +14,8 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">
-        <img src="images/Logo.png" alt="OnWear Logo" style="height: 80px; width: auto; object-fit: contain">
+      <a class="navbar-brand" href="./index.html">
+        <img src="../images/Logo.png" alt="OnWear Logo" style="height: 80px; width: auto; object-fit: contain">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="./index.html">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" data-brand="NIKE">NIKE</a>
@@ -105,7 +105,7 @@
   </div>
 
 <div id="chatbot-widget-btn" class="chatbot-widget-btn">
-  <img src="images/bot.png" alt="Chat" width="32" height="32">
+  <img src="../images/bot.png" alt="Chat" width="32" height="32">
 </div>
 
 <!-- Chatbot Modal -->
@@ -116,7 +116,7 @@
       <div class="chat-header">
         <div class="header-content">
           <div class="bot-avatar-header">
-            <img src="images/bot.png" alt="" width="40" height="40">
+            <img src="../images/bot.png" alt="" width="40" height="40">
           </div>
           <div class="header-text">
             <h1>AI Assistant</h1>
@@ -142,7 +142,7 @@
             autocomplete="off"
           />
           <button class="send-button">
-            <img src="images/send.png" alt="" width="25" height="25">
+            <img src="../images/send.png" alt="" width="25" height="25">
           </button>
         </div>
         <p class="input-hint">Press Enter to send message</p>
@@ -169,10 +169,10 @@
         <h6 class="fw-bold">Quick Links</h6>
         <ul class="list-unstyled">
           <li><a href="index.html" class="text-decoration-none text-dark">Home</a></li>
-          <li><a href="page/cart.html" class="text-decoration-none text-dark">Cart</a></li>
-          <li><a href="page/products.html?brand=NIKE" data-brand="NIKE" class="text-decoration-none text-dark">Nike</a></li>
-          <li><a href="page/products.html?brand=ADIDAS" data-brand="ADIDAS" class="text-decoration-none text-dark">Adidas</a></li>
-          <li><a href="page/products.html?brand=NEW BALANCE" data-brand="NEW BALANCE" class="text-decoration-none text-dark">New Balance</a></li>
+          <li><a href="cart.html" class="text-decoration-none text-dark">Cart</a></li>
+          <li><a href="products.html?brand=NIKE" data-brand="NIKE" class="text-decoration-none text-dark">Nike</a></li>
+          <li><a href="products.html?brand=ADIDAS" data-brand="ADIDAS" class="text-decoration-none text-dark">Adidas</a></li>
+          <li><a href="products.html?brand=NEW BALANCE" data-brand="NEW BALANCE" class="text-decoration-none text-dark">New Balance</a></li>
          </ul>
       </div>
 
@@ -193,12 +193,12 @@
 <!-- Footer End -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="js/products.js"></script>
-  <link rel="stylesheet" href="ChatBot/chatbot-widget.css">
-  <script src="ChatBot/chatbot-widget.js"></script>
+  <script src="../js/products.js"></script>
+  <link rel="stylesheet" href="../ChatBot/chatbot-widget.css">
+  <script src="../ChatBot/chatbot-widget.js"></script>
 
-  <!-- <script>
-  const backgrounds = ["/images/bg1.jpg", "/images/bg2.jpg", "/images/bg3.jpg", "/images/bg4.jpg", "/images/bg5.jpg", "/images/bg6.jpg", "/images/bg7.jpg"];
+  <script>
+  const backgrounds = ["../images/bg1.jpg", "../images/bg2.jpg", "../images/bg3.jpg", "../images/bg4.jpg", "../images/bg5.jpg", "../images/bg6.jpg", "../images/bg7.jpg"];
 
   function changeBackground() {
     const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
@@ -212,6 +212,6 @@
   changeBackground();
 
   setInterval(changeBackground, 7000);
-</script> -->
+</script>
 </body>
 </html>

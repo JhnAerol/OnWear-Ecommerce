@@ -22,15 +22,15 @@ async function getProduct() {
       if (brandActive && heading) {
       switch (brandActive.toUpperCase()) {
         case "NIKE":
-          heading.innerHTML = `<img src="images/Logo/NIKE.png" alt="NIKE" style="height:200px; object-fit:fill;">`;
+          heading.innerHTML = `<img src="../images/Logo/NIKE.png" alt="NIKE" style="height:200px; object-fit:fill;">`;
           break;
 
         case "NEW BALANCE":
-          heading.innerHTML = `<img src="images/Logo/NB.png" alt="New Balance" style="height:200px; object-fit:fill;">`;
+          heading.innerHTML = `<img src="../images/Logo/NB.png" alt="New Balance" style="height:200px; object-fit:fill;">`;
           break;
 
         case "ADIDAS":
-          heading.innerHTML = `<img src="images/Logo/ADIDAS.png" alt="Adidas" style="height:200px; object-fit:fill;">`;
+          heading.innerHTML = `<img src="../images/Logo/ADIDAS.png" alt="Adidas" style="height:200px; object-fit:fill;">`;
           break;
 
         default:
@@ -46,7 +46,7 @@ async function getProduct() {
   }
 
   try {
-    const response = await fetch("data/products.json");
+    const response = await fetch("../data/products.json");
     products = await response.json();
 
     //Filter by brand from URL
