@@ -68,7 +68,7 @@ function renderProducts() {
   const itemHTML = paginatedItems.map(product => `
     <div class="col">
       <div class="card h-100">
-        <img src="${product.images[0]}" 
+        <img src="${product.images[0].slice(3)}" 
              class="card-img-top rounded mx-auto d-block" 
              alt="${product.name}" 
              style="height: 250px; object-fit: contain;">
