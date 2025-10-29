@@ -198,20 +198,50 @@
   <script src="../ChatBot/chatbot-widget.js"></script>
 
   <script>
-  const backgrounds = ["../images/bg1.jpg", "../images/bg2.jpg", "../images/bg3.jpg", "../images/bg4.jpg", "../images/bg5.jpg", "../images/bg6.jpg", "../images/bg7.jpg"];
+  const backgrounds = [
+    "images/bg1.jpg",
+    "images/bg2.jpg",
+    "images/bg3.jpg",
+    "images/bg4.jpg",
+    "images/bg5.jpg",
+    "images/bg6.jpg",
+    "images/bg7.jpg"
+  ];
+
+  // 🔹 Preload all background images
+  const preloaded = [];
+  backgrounds.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    preloaded.push(img);
+  });
+
+  // 🔹 Set initial styles only once
+  document.body.style.cssText = `
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+  `;
+
+  let currentIndex = -1;
 
   function changeBackground() {
-    const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-    document.body.style.backgroundImage = `url(${randomBg})`;
+    // Pick a new random image that's not the same as the current one
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * backgrounds.length);
+    } while (newIndex === currentIndex);
+
+    currentIndex = newIndex;
+    document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
   }
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundAttachment = "fixed";
-  document.body.style.backgroundPosition = "center";
 
+  // 🔹 Start
   changeBackground();
-
   setInterval(changeBackground, 10000);
 </script>
+
 </body>
 </html>
