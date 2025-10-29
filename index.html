@@ -220,39 +220,47 @@
     "images/bg7.jpg"
   ];
 
-  // 🔹 Preload all background images
-  const preloaded = [];
-  backgrounds.forEach(src => {
+  const preloadedImages = [];
+  let loadedCount = 0;
+
+  backgrounds.forEach((src, index) => {
     const img = new Image();
+    img.onload = () => {
+      loadedCount++;
+      if (loadedCount === backgrounds.length && index === backgrounds.length - 1) {
+        changeBackground();
+        setInterval(changeBackground, 10000);
+      }
+    };
     img.src = src;
-    preloaded.push(img);
+    preloadedImages.push(img);
   });
 
-  // 🔹 Set initial styles only once
   document.body.style.cssText = `
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    transition: background-image 1s ease-in-out;
+    transition: background-image 0.6s ease-in-out;
   `;
 
   let currentIndex = -1;
 
   function changeBackground() {
-    // Pick a new random image that's not the same as the current one
     let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * backgrounds.length);
-    } while (newIndex === currentIndex);
+    if (backgrounds.length > 1) {
+      do {
+        newIndex = Math.floor(Math.random() * backgrounds.length);
+      } while (newIndex === currentIndex);
+    } else {
+      newIndex = 0;
+    }
 
     currentIndex = newIndex;
-    document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
+    requestAnimationFrame(() => {
+      document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
+    });
   }
-
-  // 🔹 Start
-  changeBackground();
-  setInterval(changeBackground, 10000);
 </script>
 
   
