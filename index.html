@@ -229,7 +229,7 @@
     const img = new Image();
     img.onload = () => {
       loadedCount++;
-      if (loadedCount === backgrounds.length && index === backgrounds.length - 1) {
+      if (loadedCount === backgrounds.length) {
         changeBackground();
         setInterval(changeBackground, 10000);
       }
@@ -265,6 +265,5 @@
   }
 </script>
 
-  
 </body>
 </html>

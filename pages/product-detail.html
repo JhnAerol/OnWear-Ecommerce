@@ -53,7 +53,6 @@
 
   <!-- Product List -->
   <div class="container">
-    <h1 class="h-text">OnWear Products</h1>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="items"></div>
 
@@ -173,7 +172,7 @@
     const img = new Image();
     img.onload = () => {
       loadedCount++;
-      if (loadedCount === backgrounds.length && index === backgrounds.length - 1) {
+      if (loadedCount === backgrounds.length) {
         changeBackground();
         setInterval(changeBackground, 10000);
       }
