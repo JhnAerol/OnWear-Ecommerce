@@ -448,6 +448,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .sticky-top {
   top: 140px !important;
+  z-index: 90 !important;
+}
+
+.product-thumb.active {
+  border-color: black;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.product-thumb{
+  border-color: #000000 !important;
 }
 
 /* Container Spacing */
