@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //Checkout functionality
   checkoutBtn.addEventListener("click", () => {
     if (cart.length === 0) {
-      alert("Your cart is empty!");
+      showToast("Empty Cart", "Your cart is empty!");
       return;
     }
     window.location.href = 'checkout.html';

@@ -11,8 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Redirect if cart is empty
   if (cart.length === 0) {
-    alert("Your cart is empty!");
-    window.location.href = 'cart.html';
+    showToast("Empty Cart", "Your cart is empty!");
+    setTimeout(() => {
+      window.location.href = 'cart.html';
+    }, 5000);
     return;
   }
 
@@ -84,10 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("cart");
 
     //Show success message
-    alert(`Order placed successfully! \nOrder Number: ${order.orderNumber}\n\nThank you for shopping with OnWear! 🛍️`);
-
-    //Redirect to home page
-    window.location.href = 'index.html';
+    showToast('Order Placed', `Order placed successfully! \nOrder Number: ${order.orderNumber} \n\nThank you for shopping with OnWear! 🛍️`)
+    
+    setTimeout(() => {
+       window.location.href = '../index.html';
+      }, 5000);
   });
 
   //Handle brand navigation

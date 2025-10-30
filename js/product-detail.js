@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+    showToast('Add to Cart',`${item.name} added to cart 🛒`);
     updateCartBadge();
-    alert(`${item.name} added to cart 🛒`);
   });
 
   //Handle brand navigation
