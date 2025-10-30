@@ -188,11 +188,18 @@ function addMessage(text, isBot = false) {
 }
 
 function showTypingIndicator() {
+
   const div = document.createElement('div');
+
+  const currentPage = window.location.pathname.split('/').pop();
+  const isRootPage = currentPage === '' || currentPage === 'index.html';
+
+  const botImgPath = isRootPage ? 'images/bot.png' : '../images/bot.png';
+
   div.id = 'typing-indicator';
   div.className = 'message bot-message';
   div.innerHTML = `
-    <div class="avatar bot-avatar"><img src="../images/bot.png" width="24"></div>
+    <div class="avatar bot-avatar"><img src="${botImgPath}" width="24"></div>
     <div class="message-content-wrapper">
       <div class="message-bubble bot-bubble"><p>...</p></div>
     </div>
