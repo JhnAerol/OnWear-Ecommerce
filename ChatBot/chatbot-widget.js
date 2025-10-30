@@ -85,7 +85,13 @@ function clearConversationHistory() {
 
 async function loadProducts() {
   try {
-    const res = await fetch("../data/products.json");
+
+    const currentPage = window.location.pathname.split('/').pop();
+    const isRootPage = currentPage === '' || currentPage === 'index.html';
+
+    const url = isRootPage ? 'data/products.json' : '../data/products.json';
+
+    const res = await fetch(url);
     productData = await res.json();
 
     const summary = productData
