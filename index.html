@@ -79,7 +79,7 @@
         <div class="filter-dropdown">
           <select id="priceFilter" class="form-select">
             <option value="">All Prices</option>
-            <option value="0-1000">Under ₱1,000</option>
+            <option value="0-1000">Below ₱1,000</option>
             <option value="1000-2000">₱1,000 - ₱2,000</option>
             <option value="2000-3000">₱2,000 - ₱3,000</option>
             <option value="3000-99999">Above ₱3,000</option>
@@ -163,6 +163,46 @@
   </div>
 </div>
 
+<!-- Promo Popup -->
+<div id="promoOverlay" class="promo-overlay">
+  <div class="promo-modal">
+
+    <div class="promo-content">
+
+      <!-- Carousel Wrapper -->
+      <div class="carousel-container">
+    
+        <button class="carousel-btn prev">&#10094;</button>
+
+        <div class="carousel-track">
+          <img src="images/Promo/promo1.jpg" class="carousel-slide" />
+          <img src="images/Promo/promo2.jpg" class="carousel-slide" />
+          <img src="images/Promo/promo3.jpg" class="carousel-slide" />
+        </div>
+
+        <button class="carousel-btn next">&#10095;</button>
+
+      </div>
+
+      <!-- Carousel Dots -->
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Don't Show Again -->
+      <div class="dont-show-row">
+        <input type="checkbox" id="dontShow" />
+        <label for="dontShow">Don't show again</label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Footer Start -->
 <footer class="bg-light text-dark mt-5 pt-4 pb-3 border-top">
   <div class="container text-center text-md-start">
@@ -208,62 +248,7 @@
   <script src="js/index.js"></script>
   <link rel="stylesheet" href="ChatBot/chatbot-widget.css">
   <script src="ChatBot/chatbot-widget.js"></script>
-
-<script>
-  const backgrounds = [
-    "images/bg1.jpg",
-    "images/bg2.jpg",
-    "images/bg3.jpg",
-    "images/bg4.jpg",
-    "images/bg5.jpg",
-    "images/bg6.jpg",
-    "images/bg7.jpg",
-    "images/bg8.jpg",
-    "images/bg9.jpg"
-  ];
-
-  const preloadedImages = [];
-  let loadedCount = 0;
-
-  backgrounds.forEach((src, index) => {
-    const img = new Image();
-    img.onload = () => {
-      loadedCount++;
-      if (loadedCount === backgrounds.length) {
-        changeBackground();
-        setInterval(changeBackground, 10000);
-      }
-    };
-    img.src = src;
-    preloadedImages.push(img);
-  });
-
-  document.body.style.cssText = `
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    transition: background-image 0.6s ease-in-out;
-  `;
-
-  let currentIndex = -1;
-
-  function changeBackground() {
-    let newIndex;
-    if (backgrounds.length > 1) {
-      do {
-        newIndex = Math.floor(Math.random() * backgrounds.length);
-      } while (newIndex === currentIndex);
-    } else {
-      newIndex = 0;
-    }
-
-    currentIndex = newIndex;
-    requestAnimationFrame(() => {
-      document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
-    });
-  }
-</script>
+  <script src="js/background.js"></script>
 
 </body>
 </html>

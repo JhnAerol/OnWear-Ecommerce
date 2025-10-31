@@ -173,3 +173,75 @@ function updateCartBadge() {
 //Initialize
 getProduct();
 updateCartBadge();
+
+//Promo Overlay
+document.addEventListener("DOMContentLoaded", () => {
+
+  //Show only if not disabled
+  if (!localStorage.getItem("promoDisabled")) {
+    document.getElementById("promoOverlay").style.display = "flex";
+  }
+
+  const overlay = document.getElementById("promoOverlay");
+  const dontShow = document.getElementById("dontShow");
+
+  function closePopup() {
+    if (dontShow.checked) {
+      localStorage.setItem("promoDisabled", "true");
+    }
+    overlay.style.display = "none";
+  }
+
+  overlay.addEventListener("click", e => {
+    if (e.target.id === "promoOverlay") closePopup();
+  });
+
+  //Carousel Logic
+  const track = document.querySelector(".carousel-track");
+  const slides = document.querySelectorAll(".carousel-slide");
+  const dots = document.querySelectorAll(".dot");
+  let currentIndex = 0;
+  let duration = 10000;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((d,i)=>d.classList.toggle("active", i === currentIndex));
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      currentIndex = i;
+      updateCarousel();
+    });
+  });
+
+  //Auto slide
+  setInterval(() => {
+    if (overlay.style.display !== "flex") return;
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  }, duration);
+
+  //Touch Swipe (mobile)
+  let startX = 0;
+  track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+  track.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (diff > 50) currentIndex = Math.max(0, currentIndex - 1);
+    else if (diff < -50) currentIndex = Math.min(slides.length - 1, currentIndex + 1);
+    updateCarousel();
+  });
+
+  document.querySelector(".prev").addEventListener("click", () => {
+  currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+  duration = 0
+  updateCarousel();
+  });
+
+  document.querySelector(".next").addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    duration = 0
+    updateCarousel();
+  });
+
+});

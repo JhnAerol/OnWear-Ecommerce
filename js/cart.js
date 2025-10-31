@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Calculate and display total price
   function updateTotal() {
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart
+    .filter(item => item.selected)
+    .reduce((sum, item) => sum + item.price * item.quantity, 0);
+
     cartTotal.textContent = `Total: ₱${total.toLocaleString()}`;
   }
 
@@ -29,27 +32,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     checkoutBtn.disabled = false;
 
-    cartContainer.innerHTML = cart.map((item, index) => `
+    cartContainer.innerHTML = cart.map((item, index) => 
+    `
       <div class="card mb-3 shadow-sm">
         <div class="row g-0 align-items-center">
+
+          <div class="col-md-1 text-center">
+            <input type="checkbox" class="form-check-input item-check" data-index="${index}" ${item.selected ? 'checked' : ''}>
+          </div>
+
           <div class="col-md-2 text-center">
             <img src="${item.images[0]}" class="img-fluid p-2" alt="${item.name}" style="max-height: 120px; object-fit: contain;">
           </div>
-          <div class="col-md-6">
+
+          <div class="col-md-5">
             <div class="card-body">
               <h5 class="card-title mb-1">${item.name}</h5>
               <p class="text-muted mb-1">${item.brand}</p>
               <p class="text-success fw-bold mb-0">₱${item.price.toLocaleString()}</p>
             </div>
           </div>
+
           <div class="col-md-3 d-flex align-items-center justify-content-center">
             <button class="btn btn-outline-secondary btn-sm me-2 decrease" data-index="${index}">−</button>
             <span class="mx-2">${item.quantity}</span>
             <button class="btn btn-outline-secondary btn-sm ms-2 increase" data-index="${index}">+</button>
           </div>
+
           <div class="col-md-1 text-end pe-3">
             <button class="btn btn-danger btn-sm remove" data-index="${index}">✕</button>
           </div>
+
         </div>
       </div>
     `).join("");
@@ -83,12 +96,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Checkout functionality
   checkoutBtn.addEventListener("click", () => {
-    if (cart.length === 0) {
-      showToast("Empty Cart", "Your cart is empty!");
+    const selectedItems = cart.filter(item => item.selected);
+
+    if (selectedItems.length === 0) {
+      showToast("No items selected", "Please select items to checkout.");
       return;
     }
+
+    localStorage.setItem("checkoutItems", JSON.stringify(selectedItems));
+
     window.location.href = 'checkout.html';
   });
+
 
   //Handle brand navigation
   document.querySelectorAll('.nav-link[data-brand]').forEach(link => {
@@ -97,6 +116,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const brand = e.target.dataset.brand;
       window.location.href = `products.html?brand=${encodeURIComponent(brand)}`;
     });
+  });
+
+  //Handle item selection
+  document.addEventListener("change", (e) => {
+    if (e.target.classList.contains("item-check")) {
+      const index = e.target.dataset.index;
+      cart[index].selected = e.target.checked;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateTotal();
+    }
+  });
+
+  //Handle select all
+  document.getElementById("selectAll").addEventListener("change", (e) => {
+    const checked = e.target.checked;
+    cart.forEach(item => item.selected = checked);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
   });
 
   //Initialize cart display

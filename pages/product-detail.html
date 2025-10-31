@@ -151,62 +151,7 @@
   <link rel="stylesheet" href="../ChatBot/chatbot-widget.css">
   <script src="../ChatBot/chatbot-widget.js"></script>
   <script src="../js/common.js"></script>
-
-<script>
-  const backgrounds = [
-    "../images/bg1.jpg",
-    "../images/bg2.jpg",
-    "../images/bg3.jpg",
-    "../images/bg4.jpg",
-    "../images/bg5.jpg",
-    "../images/bg6.jpg",
-    "../images/bg7.jpg",
-    "../images/bg8.jpg",
-    "../images/bg9.jpg"
-  ];
-
-  const preloadedImages = [];
-  let loadedCount = 0;
-
-  backgrounds.forEach((src, index) => {
-    const img = new Image();
-    img.onload = () => {
-      loadedCount++;
-      if (loadedCount === backgrounds.length) {
-        changeBackground();
-        setInterval(changeBackground, 10000);
-      }
-    };
-    img.src = src;
-    preloadedImages.push(img);
-  });
-
-  document.body.style.cssText = `
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    transition: background-image 0.6s ease-in-out;
-  `;
-
-  let currentIndex = -1;
-
-  function changeBackground() {
-    let newIndex;
-    if (backgrounds.length > 1) {
-      do {
-        newIndex = Math.floor(Math.random() * backgrounds.length);
-      } while (newIndex === currentIndex);
-    } else {
-      newIndex = 0;
-    }
-
-    currentIndex = newIndex;
-    requestAnimationFrame(() => {
-      document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
-    });
-  }
-</script>
+  <script src="../js/background.js"></script>
 
 </body>
 </html>

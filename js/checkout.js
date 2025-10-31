@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeOrderBtn = document.getElementById("placeOrderBtn");
 
   const SHIPPING_FEE = 150;
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("checkoutItems")) || [];
 
   //Redirect if cart is empty
   if (cart.length === 0) {
@@ -77,13 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
       total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + SHIPPING_FEE
     };
 
-    //Store order in localStorage (in real app, send to backend)
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-    orders.push(order);
-    localStorage.setItem("orders", JSON.stringify(orders));
+    //Remove only the selected items from the real cart
+    let originalCart = JSON.parse(localStorage.getItem("cart")) || [];
+    let remainingCart = originalCart.filter(item => !item.selected);
+    localStorage.setItem("cart", JSON.stringify(remainingCart));
 
-    //Clear cart
-    localStorage.removeItem("cart");
+    //Clear temporary checkout store
+    localStorage.removeItem("checkoutItems");
 
     //Show success message
     showToast('Order Placed', `Order placed successfully! \nOrder Number: ${order.orderNumber} \n\nThank you for shopping with OnWear! 🛍️`)
