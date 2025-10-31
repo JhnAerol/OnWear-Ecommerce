@@ -237,6 +237,14 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCarousel();
   });
 
+  //Close
+  document.getElementById("promoCloseBtn").addEventListener("click", () => {
+    if (dontShow.checked) {
+      sessionStorage.setItem("promoDisabled", "true");
+    }
+    overlay.style.display = "none";
+  });
+
   //Prev
   document.querySelector(".prev").addEventListener("click", () => {
     currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
