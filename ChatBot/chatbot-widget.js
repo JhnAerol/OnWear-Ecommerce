@@ -21,6 +21,10 @@ widgetBtn.addEventListener('click', () => {
   if (chatbotModal.classList.contains('active')) {
     document.getElementById('messageInput').focus();
   }
+
+  if (conversationHistory.length === 0) {
+    sendWelcomeMessageIfFirstTime();
+  }
 });
 
 closeBtn.addEventListener('click', () => {
@@ -66,6 +70,20 @@ function loadConversationHistory() {
   }
 }
 
+//Greetings
+function sendWelcomeMessageIfFirstTime() {
+  const greeted = sessionStorage.getItem("chatbot_greeted");
+
+  if (!greeted) {
+    const welcomeMsg = `Hi there 👋 Welcome to OnWear!  
+    How can I assist you today? 😊`;
+
+    addMessage(welcomeMsg, true);
+
+    sessionStorage.setItem("chatbot_greeted", "true");
+  }
+}
+
 //Save conversation history to localStorage
 function saveConversationHistory() {
   try {
@@ -81,6 +99,8 @@ function clearConversationHistory() {
   localStorage.removeItem('chatbot_conversation');
   messagesContainer.innerHTML = '';
   console.log('Conversation history cleared');
+
+  sessionStorage.removeItem("chatbot_greeted");
 }
 
 async function loadProducts() {
